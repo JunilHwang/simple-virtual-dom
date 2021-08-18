@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>가상돔 구성하기</title>
+</head>
+<body>
+<div id="root"></div>
+<script>
+function virtualDom(type, props, ...children) {
+  return { type, props, children }
+}
+
+const vm = virtualDom('div', { id: 'app' },
+  virtualDom('ul', null,
+    virtualDom('li', null,
+      virtualDom('input', { type: 'checkbox', className: 'toggle' }),
+      'todo list item 1',
+      virtualDom('button', { className: 'remove' }, '삭제')
+    ),
+    virtualDom('li', { className: 'completed' },
+      virtualDom('input', { type: 'checkbox', className: 'toggle', checked: true }),
+      'todo list item 2',
+      virtualDom('button', { className: 'remove' }, '삭제')
+    ),
+  ),
+  virtualDom('form',
+    virtualDom('input', { type: 'text' }),
+    virtualDom('button', { type: 'submit' }, '추가'),
+  )
+);
+
+const $root = document.body.querySelector('#root');
+
+$root.innerHTML = `
+  <pre>${JSON.stringify(vm, null, 2)}</pre>
+`
+</script>
+</body>
+</html>
