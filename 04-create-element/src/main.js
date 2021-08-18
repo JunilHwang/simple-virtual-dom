@@ -3,12 +3,36 @@ function h(type, props, ...children) {
   return { type, props, children: children.flat() };
 }
 
+function createElement (node) {
+  if (typeof node === 'string') {
+    return document.createTextNode(node);
+  }
+
+  const $el = document.createElement(node.type);
+
+  Object.entries(node.props || {})
+        .forEach(([attr, value]) => (
+          value && $el.setAttribute(attr, value)
+        ));
+
+  try {
+    node.children
+        .map(createElement)
+        .forEach(child => $el.appendChild(child));
+  } catch (e) {
+    console.log(node);
+    console.error(e);
+  }
+
+  return $el;
+}
+
 const state = [
   { id: 1, completed: false, content: 'todo list item 1' },
   { id: 2, completed: true, content: 'todo list item 2' },
 ];
 
-const vm = (
+const el = createElement(
   <div id="app">
     <ul>
       {state.map(({completed, content}) => (
@@ -28,6 +52,4 @@ const vm = (
 
 const $root = document.body.querySelector('#root');
 
-$root.innerHTML = `
-  <pre>${JSON.stringify(vm, null, 2)}</pre>
-`
+$root.appendChild(el);
