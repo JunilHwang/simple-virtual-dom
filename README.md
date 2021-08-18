@@ -7,4 +7,5 @@
 - [04. VirtualDOM -> RealDOM](./04-create-element/index.html)
 - [05. Diff 알고리즘 적용](./05-diff/index.html)
 - [06. 가상돔 없이 Diff 알고리즘만 적용](./06-without-vm/index.html)
-- [07. 컴포넌트와 Diff 알고리즘 혼합 ](./07-component-with-diff/index.html)
+- [07. 컴포넌트와 Diff 알고리즘 혼합](./07-component-with-diff/index.html)
+- [08. 이벤트 최적화](./08-refactoring-component-event/index.html)
