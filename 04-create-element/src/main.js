@@ -11,8 +11,9 @@ function createElement (node) {
   const $el = document.createElement(node.type);
 
   Object.entries(node.props || {})
+        .filter(([attr, value]) => value)
         .forEach(([attr, value]) => (
-          value && $el.setAttribute(attr, value)
+          $el.setAttribute(attr, value)
         ));
 
   try {

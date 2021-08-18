@@ -31,12 +31,18 @@ function createElement(node) {
   }
 
   var $el = document.createElement(node.type);
-  Object.entries(node.props || {}).forEach(function (_ref) {
+  Object.entries(node.props || {}).filter(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         attr = _ref2[0],
         value = _ref2[1];
 
-    return value && $el.setAttribute(attr, value);
+    return value;
+  }).forEach(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+        attr = _ref4[0],
+        value = _ref4[1];
+
+    return $el.setAttribute(attr, value);
   });
 
   try {
@@ -62,9 +68,9 @@ var state = [{
 }];
 var el = createElement(h("div", {
   id: "app"
-}, h("ul", null, state.map(function (_ref3) {
-  var completed = _ref3.completed,
-      content = _ref3.content;
+}, h("ul", null, state.map(function (_ref5) {
+  var completed = _ref5.completed,
+      content = _ref5.content;
   return h("li", {
     className: completed ? 'completed' : null
   }, h("input", {
