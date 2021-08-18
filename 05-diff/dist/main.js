@@ -154,4 +154,4 @@ document.body.appendChild($root);
 updateElement($root, oldNode);
 setTimeout(function () {
   return updateElement($root, newNode, oldNode);
-}, 1000); // 1초 뒤에 DOM 변경
+}, 1500); // 1초 뒤에 DOM 변경

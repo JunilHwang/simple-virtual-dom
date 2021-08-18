@@ -122,5 +122,5 @@ document.body.appendChild($root);
 updateElement($root, oldNode);
 setTimeout(() =>
     updateElement($root, newNode, oldNode),
-  1000
+  1500
 ); // 1초 뒤에 DOM 변경
