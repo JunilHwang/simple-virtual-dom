@@ -10,26 +10,28 @@
 <body>
 <div id="root"></div>
 <script>
-function virtualDom(type, props, ...children) {
+function h(type, props, ...children) {
   return { type, props, children }
 }
 
-const vm = virtualDom('div', { id: 'app' },
-  virtualDom('ul', null,
-    virtualDom('li', null,
-      virtualDom('input', { type: 'checkbox', className: 'toggle' }),
-      'todo list item 1',
-      virtualDom('button', { className: 'remove' }, '삭제')
+const vm = (
+  h('div', { id: 'app' },
+    h('ul', null,
+      h('li', null,
+        h('input', { type: 'checkbox', className: 'toggle' }),
+        'todo list item 1',
+        h('button', { className: 'remove' }, '삭제')
+      ),
+      h('li', { className: 'completed' },
+        h('input', { type: 'checkbox', className: 'toggle', checked: true }),
+        'todo list item 2',
+        h('button', { className: 'remove' }, '삭제')
+      ),
     ),
-    virtualDom('li', { className: 'completed' },
-      virtualDom('input', { type: 'checkbox', className: 'toggle', checked: true }),
-      'todo list item 2',
-      virtualDom('button', { className: 'remove' }, '삭제')
-    ),
-  ),
-  virtualDom('form',
-    virtualDom('input', { type: 'text' }),
-    virtualDom('button', { type: 'submit' }, '추가'),
+    h('form',
+      h('input', { type: 'text' }),
+      h('button', { type: 'submit' }, '추가'),
+    )
   )
 );
 
